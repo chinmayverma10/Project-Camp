@@ -20,12 +20,12 @@ const registerUserValidator = () => {
       .withMessage("Password is required")
       .isLength({ min: 8 })
       .withMessage("Password should be atleast 8 Character")
-      // .matches(
-      //   /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>_\-+=/\\[\];'`~]).+$/,
-      // )
-      // .withMessage(
-      //   "Password must contain at least one uppercase letter, one number, and one special character",
-      // ),
+      .matches(
+        /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>_\-+=/\\[\];'`~]).+$/,
+      )
+      .withMessage(
+        "Password must contain at least one uppercase letter, one number, and one special character",
+      ),
   ];
 };
 
@@ -42,14 +42,14 @@ const loginUserValidator = () => {
       .trim()
       .notEmpty()
       .withMessage("Password is required")
-      // .isLength({ min: 8 })
-      // .withMessage("Password should be atleast 8 Character")
-      // .matches(
-      //   /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>_\-+=/\\[\];'`~]).+$/,
-      // )
-      // .withMessage(
-      //   "Password must contain at least one uppercase letter, one number, and one special character",
-      // ),
+      .isLength({ min: 8 })
+      .withMessage("Password should be atleast 8 Character")
+      .matches(
+        /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>_\-+=/\\[\];'`~]).+$/,
+      )
+      .withMessage(
+        "Password must contain at least one uppercase letter, one number, and one special character",
+      ),
   ];
 };
 
