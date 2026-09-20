@@ -4,9 +4,11 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node scripts/integration-test.js",
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "promote-admin": "node scripts/promote-admin.js",
+    "seed-demo": "node scripts/seed-demo-data.js"
   },
   "author": "",
   "license": "ISC",
@@ -23,7 +25,7 @@
     "express": "^5.2.1",
     "express-validator": "^7.3.2",
     "jsonwebtoken": "^9.0.3",
-    "mailgen": "^2.0.34",
-    "mongoose": "^9.7.2"
+    "mongoose": "^9.7.2",
+    "multer": "^2.4.0"
   }
 }

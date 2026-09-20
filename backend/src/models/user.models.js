@@ -1,7 +1,7 @@
 import mongoose, {Schema} from "mongoose";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
-import crypto from "crypto"
+import {AvailableUserRoles, UserRolesEnum} from "../utils/constants.js"
 
 
 const userSchema = new Schema(
@@ -36,29 +36,18 @@ const userSchema = new Schema(
             type: String,
             trim: true,
         },
+        role: {
+            type: String,
+            enum: AvailableUserRoles,
+            default: UserRolesEnum.MEMBER
+        },
         password: {
             type: String,
             required: [true, "Password is required"]
         },
-        isEmailVerified: {
-            type: Boolean,
-            default: false
-        },
         refreshToken: {
             type: String
         },
-        forgotPaswordToken: {
-            type: String
-        },
-        forgotPasswordExpiry: {
-            type: Date
-        },
-        emailVerificationToken: {
-            type: String
-        },
-        emailVerificationExpiry: {
-            type: Date
-        }
     },
     {
         timestamps: true
@@ -98,19 +87,5 @@ userSchema.methods.generateRefreshToken = function(){
         { expiresIn: process.env.REFRESH_TOKEN_EXPIRY }
     )
 }
-
-userSchema.methods.generateTemporaryToken = function(){
-    const unhashedToken = crypto.randomBytes(20).toString("hex");
-
-    const hashedToken = crypto
-        .createHash("sha256")
-        .update(unhashedToken)
-        .digest("hex")
-
-    const tokenExpiry = Date.now() + (20*60*1000) //20 mins
-
-    return {unhashedToken, hashedToken, tokenExpiry}
-}
-
 
 export const User = mongoose.model("User",userSchema)
